@@ -3,23 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DepartRequest;
-use App\Repositories\Interfaces\DepartRepositoriesInterface;
-use Illuminate\Http\Request;
-
+use App\Http\Requests\DepartmentRequest;
+use App\Repositories\Department\DepartmentRepositoriesInterface;
 class DepartmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    // private DepartRepositoriesInterface $departRepository;
-    public function __construct(private DepartRepositoriesInterface $departRepository)
+    public function __construct(private DepartmentRepositoriesInterface $departmentRepository)
     {
-        // $this->departRepository = $departRepository;
     }
     public function index()
     {
-        $departments = $this->departRepository->getAllDepart();   
+        $departments = $this->departmentRepository->getAll();       
         return view('admin.department.index', compact('departments'));
     }
     /**
@@ -33,9 +29,9 @@ class DepartmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(DepartRequest $request)
+    public function store(DepartmentRequest $request)
     {
-        $this->departRepository->createDepartment($request->validated());
+        $this->departmentRepository->store($request->validated());
         return redirect()->route('admin.department.index')->with('success','Thêm mới thành công');
     }
 
@@ -52,16 +48,16 @@ class DepartmentsController extends Controller
      */
     public function edit(string $id)
     {
-        $department = $this->departRepository->getDepartmentbyId($id);
+        $department = $this->departmentRepository->find($id);
         return view('admin.department.edit', compact('department'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(DepartRequest $request, string $id)
+    public function update(DepartmentRequest $request, string $id)
     {
-        $this -> departRepository->updateDepartment($id, $request->validated());
+        $this -> departmentRepository->update($id, $request->validated());
         return redirect()->route('admin.department.index')->with('success','Sửa thành công');
     }
 
@@ -70,7 +66,7 @@ class DepartmentsController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->departRepository->softDeleteDepartment($id);
+        $this->departmentRepository->destroy($id);
         return redirect()->route('admin.department.index')->with('success','Xoá thành công');
     }
 }

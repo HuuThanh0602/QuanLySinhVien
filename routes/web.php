@@ -4,9 +4,13 @@ use App\Http\Controllers\admin\DepartmentsController;
 use App\Http\Controllers\admin\QLSVController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DepartmentsController::class, 'index'])->name('admin.department.index');
-Route::get('/department/create', [DepartmentsController::class, 'create'])->name('admin.department.create');
-Route::post('department/store',[DepartmentsController::class, 'store'])->name('admin.department.store');
-Route::get('department/{id}/edit',[DepartmentsController::class, 'edit'])->name('admin.department.edit');
-Route::put('department/{id}/update',[DepartmentsController::class, 'update'])->name('admin.department.update');
-Route::delete('department/{id}/destroy',[DepartmentsController::class, 'destroy'])->name('admin.department.destroy');
+
+Route::name('admin.department.')->group(function () {
+    Route::get('/', [DepartmentsController::class, 'index'])->name('index');
+    Route::get('/create', [DepartmentsController::class, 'create'])->name('create');
+    Route::post('/store',[DepartmentsController::class, 'store'])->name('store');
+    Route::get('/{id}/edit',[DepartmentsController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update',[DepartmentsController::class, 'update'])->name('update');
+    Route::delete('/{id}/destroy',[DepartmentsController::class, 'destroy'])->name('destroy');
+
+});
