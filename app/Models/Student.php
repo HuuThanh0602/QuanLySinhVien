@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Students extends Model
+class Student extends Model
 {
     protected $fillable=[
         'full_name',
@@ -19,6 +19,6 @@ class Students extends Model
         return $this->hasOne(User::class , 'user_id');
     }
     public function department(){
-        return $this->belongsTo(Departments::class,'department_id');
+        return $this->belongsTo(Department::class,'department_id');
     }
 }

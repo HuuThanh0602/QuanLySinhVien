@@ -4,8 +4,9 @@ namespace App\Repositories\Interfaces;
 interface DepartRepositoriesInterface
 {
     public function getAllDepart();
-    public function getDepartbyId($departId);
-    public function deleteDepart($departId);
-    public function createDepart(array $departDetails);
-    public function updateDepart($departId , array $newDetails);
+    public function getDepartmentbyId($departmentId);
+    public function deleteDepartment($departmentId);
+    public function softDeleteDepartment($departmentId);
+    public function createDepartment(array $departDetails);
+    public function updateDepartment($departmentId , array $newDetails);
 }

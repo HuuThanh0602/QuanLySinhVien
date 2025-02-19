@@ -1,29 +1,34 @@
 <?php
 namespace App\Repositories\BaseRepositories;
 
-use App\Models\Departments;
+use App\Models\Department;
 use App\Repositories\Interfaces\DepartRepositoriesInterface;
 
 class DepartRepository implements DepartRepositoriesInterface
 {
+
     public function getAllDepart()
     {
-        return Departments::paginate(1);
+        return Department::whereNULL('deleted_at')->paginate(1);
     }
-    public function getDepartbyId($departId)
+    public function getDepartmentbyId($departmentId)
     {
-        return Departments::findOrfail($departId);
+        return Department::findOrfail($departmentId);
     }
-    public function deleteDepart($departId)
+    public function deleteDepartment($departmentId)
     {
-        return Departments::destroy($departId);
+        return Department::destroy($departmentId);
     }
-    public function createDepart(array $departDetails)
+    public function softDeleteDepartment($departmentId)
     {
-        return Departments::create($departDetails);
+        return Department::whereId($departmentId)->update(['deleted_at'=>now()]);
     }
-    public function updateDepart($departId , array $newDetails)
+    public function createDepartment(array $departDetails)
     {
-        return Departments::whereId($departId)->update($newDetails);
+        return Department::create($departDetails);
+    }
+    public function updateDepartment($departmentId , array $newDetails)
+    {
+        return Department::whereId($departmentId)->update($newDetails);
     }
 }

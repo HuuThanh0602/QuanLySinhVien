@@ -12,10 +12,10 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    private DepartRepositoriesInterface $departRepository;
-    public function __construct(DepartRepositoriesInterface $departRepository)
+    // private DepartRepositoriesInterface $departRepository;
+    public function __construct(private DepartRepositoriesInterface $departRepository)
     {
-        $this->departRepository = $departRepository;
+        // $this->departRepository = $departRepository;
     }
     public function index()
     {
@@ -35,7 +35,7 @@ class DepartmentsController extends Controller
      */
     public function store(DepartRequest $request)
     {
-        $this->departRepository->createDepart($request->validated());
+        $this->departRepository->createDepartment($request->validated());
         return redirect()->route('admin.department.index')->with('success','Thêm mới thành công');
     }
 
@@ -52,7 +52,7 @@ class DepartmentsController extends Controller
      */
     public function edit(string $id)
     {
-        $department = $this->departRepository->getDepartbyId($id);
+        $department = $this->departRepository->getDepartmentbyId($id);
         return view('admin.department.edit', compact('department'));
     }
 
@@ -61,7 +61,7 @@ class DepartmentsController extends Controller
      */
     public function update(DepartRequest $request, string $id)
     {
-        $this -> departRepository->updateDepart($id, $request->validated());
+        $this -> departRepository->updateDepartment($id, $request->validated());
         return redirect()->route('admin.department.index')->with('success','Sửa thành công');
     }
 
@@ -70,7 +70,7 @@ class DepartmentsController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->departRepository->deleteDepart($id);
+        $this->departRepository->softDeleteDepartment($id);
         return redirect()->route('admin.department.index')->with('success','Xoá thành công');
     }
 }
