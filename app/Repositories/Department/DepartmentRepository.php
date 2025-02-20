@@ -9,4 +9,5 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
     {
         return \App\Models\Department::class;
     }
+
 }

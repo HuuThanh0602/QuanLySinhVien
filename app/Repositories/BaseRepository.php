@@ -5,6 +5,7 @@ use App\Repositories\RepositoryInterface;
 abstract class BaseRepository implements  RepositoryInterface
 {
     protected $model;
+    protected $paginate;
 
     public function __construct()
     {
@@ -17,13 +18,13 @@ abstract class BaseRepository implements  RepositoryInterface
             $this->getModel()
         );
     }
-    public function getAll()
+    public function getAll($paginate)
     {
-        return $this->model->whereNull('deleted_at')->paginate(10);
+        return $this->model->paginate($paginate);
     }
     public function find($id)
     {
-        return $this->model->find($id);
+        return $this->model->findOrfail($id);
     }
     public function store(array $attributes)
     {
@@ -43,7 +44,7 @@ abstract class BaseRepository implements  RepositoryInterface
     {
         $results = $this->find($id);
         if($results){
-            $results->update(['deleted_at'=>now()]);
+            $results->delete();
             return $results;
         }
         return false;

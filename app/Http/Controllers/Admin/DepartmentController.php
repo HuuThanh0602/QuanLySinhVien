@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartmentRequest;
 use App\Repositories\Department\DepartmentRepositoriesInterface;
-class DepartmentsController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class DepartmentsController extends Controller
     }
     public function index()
     {
-        $departments = $this->departmentRepository->getAll();       
+        $departments = $this->departmentRepository->getAll(2);       
         return view('admin.department.index', compact('departments'));
     }
     /**
@@ -31,8 +30,8 @@ class DepartmentsController extends Controller
      */
     public function store(DepartmentRequest $request)
     {
-        $this->departmentRepository->store($request->validated());
-        return redirect()->route('admin.department.index')->with('success','Thêm mới thành công');
+        $this->departmentRepository->store($request->all());
+        return redirect()->route('admin.department.index')->with('success', __('messages.success.create'));
     }
 
     /**
@@ -57,7 +56,7 @@ class DepartmentsController extends Controller
      */
     public function update(DepartmentRequest $request, string $id)
     {
-        $this -> departmentRepository->update($id, $request->validated());
+        $this -> departmentRepository->update($id, $request->all());
         return redirect()->route('admin.department.index')->with('success','Sửa thành công');
     }
 

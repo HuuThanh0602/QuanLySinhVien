@@ -29,8 +29,8 @@ class DepartmentRequest extends FormRequest
     public function messages()
     {
         return[
-            'name.required' => 'Không được để trống tên khoa',
-            'name.max' => 'Tên khoa tối đa 50 ký tự',
+            'name.required' => __('validation.required', ['attribute'=>__('validation.attributes.name')]),
+            'name.max' => __('validation.max.string',['attribute'=>__('validation.name'),'max'=>50]),
             'description.max' => 'Mô tả tối đa 255 ký tự', 
         ];
     }
