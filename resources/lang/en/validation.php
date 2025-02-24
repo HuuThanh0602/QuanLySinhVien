@@ -192,8 +192,6 @@ return [
     */
 
     'attributes' => [
-        'name' =>'name',
-        'description' =>'description',
     ],
 
 ];

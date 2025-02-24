@@ -3,7 +3,7 @@ namespace App\Repositories\Department;
 
 use App\Repositories\BaseRepository;
 
-class DepartmentRepository extends BaseRepository implements DepartmentRepositoriesInterface
+class DepartmentRepository extends BaseRepository implements DepartmentRepositoryInterface
 {
     public function getModel()
     {

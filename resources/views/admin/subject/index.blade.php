@@ -150,9 +150,9 @@
     <div class="main">
         <div class="table-wrapper">
             <div class="table-title">
-                <h2>{{__('common.management.department')}}</h2>
+                <h2>{{__('common.management.subject')}}</h2>
                 <div class="button">
-                    <a href="{{route('admin.department.create')}}" class="btn btn-success">
+                    <a href="{{route('admin.subject.create')}}" class="btn btn-success">
                         <i class="bi bi-plus-circle-fill"></i> <span>{{__('common.add_new')}}</span>
                     </a>                  
                 </div>
@@ -162,22 +162,22 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>{{__('common.department_name')}}</th>
+                        <th>{{__('common.subject_name')}}</th>
                         <th>{{__('common.description')}}</th>
                         <th>{{__('common.action')}}</th>		
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($departments as $department)
+                    @foreach($subjects as $subject)
                     <tr>
-                        <td>{{ $department->id }}</td>
-                        <td>{{ $department->name }}</td>
-                        <td>{{ $department->description }}</td>
+                        <td>{{ $subject->id }}</td>
+                        <td>{{ $subject->name }}</td>
+                        <td>{{ $subject->description }}</td>
                         <td >
-                            <a href="{{route('admin.department.edit',['id'=>$department->id])}}">
+                            <a href="{{route('admin.subject.edit',['id'=>$subject->id])}}">
                                 <i class="bi bi-pencil-fill edit-icon"></i>
                             </a>
-                            <form action="{{route('admin.department.destroy',['id'=>$department->id])}}" method="post" 
+                            <form action="{{route('admin.subject.destroy',['id'=>$subject->id])}}" method="post" 
                                   onsubmit="return confirm('Bạn có chắc chắn muốn xóa mục này?');" 
                                   style="display: inline-block; margin-left: 5px;">
                                 @csrf
@@ -192,7 +192,7 @@
                 </tbody>
 
             </table>
-			{{ $departments->links('pagination::bootstrap-4') }}
+			{{ $subjects->links('pagination::bootstrap-4') }}
 			
         </div>
     </div>

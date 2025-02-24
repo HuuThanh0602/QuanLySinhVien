@@ -12,6 +12,7 @@ class Subject extends Model
     use SoftDeletes;
     protected $cats = ['deleted_at' => 'datetime'];
     protected $fillable = [
-        ''
+        'name',
+        'description'
     ];
 }

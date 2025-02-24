@@ -135,9 +135,6 @@
 		}
     </style>
 </head>
-<header>
-	@include('layouts.navar')
-</header>
 <body>
     @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -150,9 +147,9 @@
     <div class="main">
         <div class="table-wrapper">
             <div class="table-title">
-                <h2>{{__('common.management.department')}}</h2>
+                <h2>{{__('common.management.student')}}</h2>
                 <div class="button">
-                    <a href="{{route('admin.department.create')}}" class="btn btn-success">
+                    <a href="{{route('admin.student.create')}}" class="btn btn-success">
                         <i class="bi bi-plus-circle-fill"></i> <span>{{__('common.add_new')}}</span>
                     </a>                  
                 </div>
@@ -162,22 +159,32 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>{{__('common.department_name')}}</th>
-                        <th>{{__('common.description')}}</th>
-                        <th>{{__('common.action')}}</th>		
+                        <th>{{__('common.name')}}</th>
+                        <th>{{__('common.day_of_birth')}}</th>
+                        <th>{{__('common.gender')}}</th>
+						<th>{{__('common.email')}}</th>
+						<th>{{__('common.description')}}</th>
+						<th>{{__('common.address')}}</th>
+						<th>{{__('common.phone')}}</th>	
+						<th>{{__('common.action')}}</th>	
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($departments as $department)
+                    @foreach($students as $student)
                     <tr>
-                        <td>{{ $department->id }}</td>
-                        <td>{{ $department->name }}</td>
-                        <td>{{ $department->description }}</td>
+                        <td>{{$student->id }}</td>
+                        <td>{{$student->full_name }}</td>
+                        <td>{{$student->day_of_birth }}</td>
+						<td>{{$student->gender}}</td>
+						<td>{{$student->user->email}}</td>
+						<td>{{$student->department->name}}</td>
+						<td>{{$student->address}}</td>
+						<td>{{$student->phone}}</td>
                         <td >
-                            <a href="{{route('admin.department.edit',['id'=>$department->id])}}">
+                            <a href="{{route('admin.student.edit',['id'=>$student->id])}}">
                                 <i class="bi bi-pencil-fill edit-icon"></i>
                             </a>
-                            <form action="{{route('admin.department.destroy',['id'=>$department->id])}}" method="post" 
+                            <form action="{{route('admin.student.destroy',['id'=>$student->id])}}" method="post" 
                                   onsubmit="return confirm('Bạn có chắc chắn muốn xóa mục này?');" 
                                   style="display: inline-block; margin-left: 5px;">
                                 @csrf
@@ -190,9 +197,8 @@
                     </tr>
                     @endforeach
                 </tbody>
-
             </table>
-			{{ $departments->links('pagination::bootstrap-4') }}
+			{{ $students->links('pagination::bootstrap-4') }}
 			
         </div>
     </div>

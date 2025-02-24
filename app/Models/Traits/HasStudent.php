@@ -5,8 +5,8 @@ use App\Models\Student;
 
 trait HasStudent
 {
-    public function Student()
+    public function student()
     {
-        return $this->hasMany(Student::class,'student_id');
+        return $this->hasMany(Student::class,'id' ,'student_id');
     }
 }

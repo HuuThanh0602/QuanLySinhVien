@@ -18,8 +18,11 @@ abstract class BaseRepository implements  RepositoryInterface
             $this->getModel()
         );
     }
-    public function getAll($paginate)
+    public function getAll()
     {
+        return $this->model->all();
+    }
+    public function getPaginate($paginate){
         return $this->model->paginate($paginate);
     }
     public function find($id)
@@ -29,7 +32,6 @@ abstract class BaseRepository implements  RepositoryInterface
     public function store(array $attributes)
     {
         return $this->model->create($attributes);
-
     }
     public function update($id, array $attributes)
     {
@@ -42,11 +44,6 @@ abstract class BaseRepository implements  RepositoryInterface
     }
     public function destroy($id)
     {
-        $results = $this->find($id);
-        if($results){
-            $results->delete();
-            return $results;
-        }
-        return false;
+        return $this->find($id)->delete();
     }
 }

@@ -61,7 +61,7 @@
     
         <div class="card">
             <div class="card-header">
-                <h4 class="modal-title">Thêm mới</h4>
+                <h4 class="modal-title">{{__('common.edit')}}</h4>
             </div>
             
             <div class="card-body">
@@ -69,14 +69,14 @@
                     @csrf
                     @method('PUT')                
                     <div class="form-group">
-                        <label for="name">Tên Khoa</label>
+                        <label for="name">{{__('common.department_name')}}</label>
                         <input type="text"  class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{$department->name}}" >
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description">Mô tả</label>
+                        <label for="description">{{__('common.description')}}</label>
                         <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value = "{{$department->description}}" >
                         @error('description')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -84,8 +84,8 @@
                     </div> 
                     <div class="modal-footer">
                         
-                        <a href="{{ route('admin.department.index') }}" class="btn btn-secondary">Quay lại</a>
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <a href="{{ route('admin.department.index') }}" class="btn btn-secondary">{{__('common.cancel')}}</a>
+                        <button type="submit" class="btn btn-success">{{__('common.save')}}</button>
                     </div>
                 </form>
                 

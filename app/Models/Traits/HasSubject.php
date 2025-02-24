@@ -7,6 +7,6 @@ trait HasSubject
 {
     public function subject()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->belongsTo(Subject::class,'id' ,'subject_id');
     }
 }

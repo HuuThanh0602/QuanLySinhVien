@@ -65,10 +65,10 @@
             </div>
             
             <div class="card-body">
-                <form action="{{ route('admin.department.store') }}" method="POST">
+                <form action="{{ route('admin.subject.store') }}" method="POST">
                     @csrf                  
                     <div class="form-group">
-                        <label for="name">{{__('common.department_name')}}</label>
+                        <label for="name">{{__('common.subject_name')}}</label>
                         <input type="text"  class="form-control @error('name') is-invalid @enderror" id="name" name="name"  >
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -82,7 +82,7 @@
                         @enderror
                     </div> 
                     <div class="modal-footer">
-                        <a href="{{ route('admin.department.index') }}" class="btn btn-secondary">{{__('common.cancel')}}</a>
+                        <a href="{{ route('admin.subject.index') }}" class="btn btn-secondary">{{__('common.cancel')}}</a>
                         <button type="submit" class="btn btn-success">{{__('common.save')}}</button>
                     </div>
                 </form>

@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartmentRequest;
-use App\Repositories\Department\DepartmentRepositoriesInterface;
+use App\Repositories\Department\DepartmentRepositoryInterface;
+
 class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function __construct(private DepartmentRepositoriesInterface $departmentRepository)
+    public function __construct(private DepartmentRepositoryInterface $departmentRepository)
     {
     }
     public function index()
     {
-        $departments = $this->departmentRepository->getAll(2);       
+        $departments = $this->departmentRepository->getPaginate(2);       
         return view('admin.department.index', compact('departments'));
     }
     /**
@@ -57,7 +58,7 @@ class DepartmentController extends Controller
     public function update(DepartmentRequest $request, string $id)
     {
         $this -> departmentRepository->update($id, $request->all());
-        return redirect()->route('admin.department.index')->with('success','Sửa thành công');
+        return redirect()->route('admin.department.index')->with('success', __('messages.success.update'));
     }
 
     /**
@@ -66,6 +67,6 @@ class DepartmentController extends Controller
     public function destroy(string $id)
     {
         $this->departmentRepository->destroy($id);
-        return redirect()->route('admin.department.index')->with('success','Xoá thành công');
+        return redirect()->route('admin.department.index')->with('success', __('messages.success.delete'));
     }
 }
