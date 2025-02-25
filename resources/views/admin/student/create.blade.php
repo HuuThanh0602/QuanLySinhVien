@@ -1,69 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Thesis</title>
-
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link href="{{ asset('css/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet"> 
-
-
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-
-    <style>
-        body {
-            background-color: #f8f9fa; 
-            font-family: Arial, sans-serif;
-        }
-
-        .card {
-            border-radius: 0.5rem; 
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-        }
-        
-        .card-header {
-            background-color: #007bff;
-            color: white; 
-            text-align: center; 
-            border-top-left-radius: 0.5rem; 
-            border-top-right-radius: 0.5rem; 
-        }
-
-        .form-control {
-            border-radius: 0.25rem; 
-            border: 1px solid #ced4da; 
-        }
-
-        .form-control:focus {
-            border-color: #007bff; 
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
-        }
-
-        .btn-secondary {
-            background-color: #6c757d; 
-        }
-
-        .btn-success {
-            background-color: #28a745; 
-        }
-
-        .btn-secondary:hover, .btn-success:hover {
-            opacity: 0.8; 
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-    
+@extends('admin.layouts.app')
+@section('title',__('common.management.student'))
+@section('content')
+<div class="container mt-4">
         <div class="card">
-            <div class="card-header">
-                <h4 class="modal-title">{{__('common.add_new')}}</h4>
+            <div class="card-header text-center bg-primary text-white">
+                <h4>{{ __('common.add_new') }} </h4>
             </div>
-            
             <div class="card-body">
                 <form action="{{ route('admin.student.store') }}" method="POST">
                     @csrf                  
@@ -126,12 +68,12 @@
                         @enderror
                     </div> 
                     <div class="modal-footer">
-                        <a href="{{ route('admin.student.index') }}" class="btn btn-secondary">Quay lại</a>
-                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <a href="{{ route('admin.student.index') }}" class="btn btn-secondary">{{ __('common.cancel') }}</a>
+                        <button type="submit" class="btn btn-success">{{ __('common.save') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
+

@@ -14,15 +14,21 @@ return[
     'subject'=>'The subject',
     'description'=>'The description',
     'management'=>[
+        'management'=>'Management',
         'department'=>'Department Management',
         'student'=>'Student Management',
         'subject'=>'Subject Management',
         'result'=>'Result Management',
     ],
-
     'action'=>'Action',
     'add_new'=>'Add New',
     'cancel'=>'Cancel',
     'save'=>'Save',
     'edit'=>'Edit',
+    'login'=>'Login',
+    'logout'=>'Logout',
+    'confirm_delete'=>[
+        'title'=>'Confirm deletion',
+        'confirm'=>'Are you sure you want to delete this item?',],
+    'delete'=>'Delete',
 ];

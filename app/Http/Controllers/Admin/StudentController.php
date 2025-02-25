@@ -36,24 +36,8 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        $student=[
-            'user'=>[
-                'email'=>$request->email,
-                'password'=>'tlu@'.$request->phone,
-                'role'=>'student',
-            ],    
-            'student'=>[
-                'full_name'=>$request->name,
-                'day_of_birth'=>$request->day_of_birth,
-                'gender'=>$request->gender,
-                'address'=>$request->address,
-                'phone'=>$request->phone,
-                'user_id'=>null,
-                'department_id'=>$request->department,
-            ],
-            
-        ];
-        $this->studentRepository->store($student);
+       
+        $this->studentRepository->store($request->all());
         return redirect()->route('admin.student.index')->with('success',__('messages.success.create'));
     }
 
@@ -80,22 +64,7 @@ class StudentController extends Controller
      */
     public function update(StudentRequest $request, string $id)
     {
-        $student=[
-            'user'=>[
-                'email'=>$request->email,
-                'password'=>'tlu@'.$request->phone,
-                'role'=>'student',
-            ],    
-            'student'=>[
-                'full_name'=>$request->name,
-                'day_of_birth'=>$request->day_of_birth,
-                'gender'=>$request->gender,
-                'address'=>$request->address,
-                'phone'=>$request->phone,
-                'department_id'=>$request->department,
-            ],       
-        ];
-        $this->studentRepository->update($id,$student);
+        $this->studentRepository->update($id,$request->all());
         return redirect()->route('admin.student.index')->with('success',__('messages.success.update'));
 
     }
