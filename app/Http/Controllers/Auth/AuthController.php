@@ -26,9 +26,9 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         
         if(Auth::attempt($credentials)){
-            return redirect()->route('admin.department.index')->with('success',__('hi'));
+            return redirect()->route('admin.department.index');
         }
-        return back()->with('error',('hu'));
+        return back()->with('error',__('auth.failed'));
         
     }
     public function logout(Request $request)
