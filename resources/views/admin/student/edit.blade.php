@@ -66,27 +66,12 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div> 
-                <div class="modal-footer">
-                    <a href="{{ route('admin.student.index') }}" class="btn btn-secondary">Quay lại</a>
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="{{ $department->id }}">
-                        Xóa
-                    </button>
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                <div class="text-end">
+                    <a href="{{ route('admin.student.index') }}" class="btn btn-secondary ">{{ __('common.cancel') }}</a>
+                    <button type="submit" class="btn btn-success">{{ __('common.save') }}</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@endsection
-@include('admin.layouts.partials.modal_delete')
-@section('scripts')
-    <script>
-        var confirmDeleteModal = document.getElementById('confirmDeleteModal');
-        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var id = button.getAttribute('data-id');
-            var form = document.getElementById('deleteForm');
-            form.action = '/admin/student/'+id+'/destroy';
-        });
-    </script>
 @endsection

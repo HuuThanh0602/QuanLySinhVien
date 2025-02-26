@@ -49,7 +49,7 @@
         {{ $departments->links('pagination::bootstrap-4') }}
     </div>
 
-    @include('admin.layouts.partials.modal_delete')
+@include('admin.layouts.partials.modal_delete')
 @endsection
 
 @section('scripts')

@@ -16,9 +16,9 @@ class StudentController extends Controller
     public function __construct(private StudentRepositoryInterface $studentRepository, private DepartmentRepositoryInterface $departmentRepository)
     {
     }
-    public function index()
+    public function index(Request $request)
     {
-        $students = $this->studentRepository->getPaginate(2);
+        $students = $this->studentRepository->search(2,$request->only('age_from','age_to','carrier','finished_level','score_to','score_from'));
         return view('admin.student.index',compact('students'));   
     }
 
@@ -27,6 +27,7 @@ class StudentController extends Controller
      */
     public function create()
     {
+        
         $departments=$this->departmentRepository->getAll();
         return view('admin.student.create', compact('departments'));
     }

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Providers;
-
-use App\Repositories\BaseRepository;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use App\Repositories\Department\DepartmentRepository;
+use App\Repositories\Result\ResultRepository;
+use App\Repositories\Result\ResultRepositoryInterface;
 use App\Repositories\Student\StudentRepository;
 use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\Subject\SubjectRepository;
@@ -21,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DepartmentRepositoryInterface ::class , DepartmentRepository::class);
         $this->app->bind(StudentRepositoryInterface::class, StudentRepository::class);
         $this->app->bind(SubjectRepositoryInterface::class, SubjectRepository::class);
+        $this->app->bind(ResultRepositoryInterface::class, ResultRepository::class);
     }
 
     /**

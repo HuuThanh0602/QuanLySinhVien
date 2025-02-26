@@ -57,7 +57,7 @@
             var button = event.relatedTarget;
             var id = button.getAttribute('data-id');
             var form = document.getElementById('deleteForm');
-            form.action = '/admin/subject/'+id+'destroy/';
+            form.action = '/admin/subject/'+id+'/destroy';
         });
     </script>
 @endsection

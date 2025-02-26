@@ -7,16 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.student.index')}}">{{__('common.management.student')}}</a>
+                    <a class="nav-link" href="{{route('student.profile.index')}}">{{__('common.profile')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.department.index')}}">{{__('common.management.department')}}</a>
+                    <a class="nav-link" href="{{route('student.register.index')}}">{{__('common.register')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.subject.index')}}">{{__('common.management.subject')}}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">{{__('common.management.result')}}</a>
+                    <a class="nav-link" href="{{route('admin.subject.index')}}">{{__('common.result')}}</a>
                 </li>
             </ul>
             <div class="d-flex">

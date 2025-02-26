@@ -10,10 +10,54 @@
 			<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
 		</div>
 		@endif
-        <div class="mb-3">
-            <a href="{{route('admin.student.create')}}" class="btn btn-success">
-                {{__('common.add_new')}}
-            </a>                  
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+            <a href="{{ route('admin.student.create') }}" class="btn btn-success">
+                {{ __('common.add_new') }}
+            </a>
+            <div class="mb-2" style="width:70%">
+                <form action="{{ route('admin.student.index') }}" method="GET" class="row g-1">
+                    <div class="col-md-3">
+                        <label for="age_from" class="form-label">{{ __('common.age_from') }}</label>
+                        <input type="number" name="age_from" id="age_from" class="form-control" 
+                            value="{{ request('age_from') }}" placeholder="{{ __('common.age_from') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="age_to" class="form-label">{{ __('common.age_to') }}</label>
+                        <input type="number" name="age_to" id="age_to" class="form-control" 
+                            value="{{ request('age_to') }}" placeholder="{{ __('common.age_to') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">{{ __('common.phone_carrier') }}</label>
+                        <select name="carrier" class="form-select">
+                            <option value="">{{ __('common.all_carriers') }}</option>
+                            <option value="viettel" {{ request('carrier') == 'viettel' ? 'selected' : '' }}>Viettel</option>
+                            <option value="mobi" {{ request('carrier') == 'mobi' ? 'selected' : '' }}>Mobifone</option>
+                            <option value="vina" {{ request('carrier') == 'vina' ? 'selected' : '' }}>Vinaphone</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">{{ __('common.finished_level') }}</label>
+                        <select name="finished_level" class="form-select">
+                            <option value="">----</option>
+                            <option value="finished" {{ request('finished_level') == 'finished' ? 'selected' : '' }}>{{__('common.finished')}}</option>
+                            <option value="unfinished" {{ request('finished_level') == 'unfinished' ? 'selected' : '' }}>{{__('common.unfinished')}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="score_from" class="form-label">{{ __('common.score_from') }}</label>
+                        <input type="number" name="score_from" id="score_from" class="form-control" 
+                            value="{{ request('score_from') }}" placeholder="{{ __('common.score_from') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="score_to" class="form-label">{{ __('common.score_to') }}</label>
+                        <input type="number" name="score_to" id="score_to" class="form-control" 
+                            value="{{ request('score_to') }}" placeholder="{{ __('common.score_to') }}">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">{{ __('common.filter') }}</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <table class="table table-bordered">

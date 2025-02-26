@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartmentRequest;
 use App\Repositories\Department\DepartmentRepositoryInterface;
+use Illuminate\Support\Facades\App;
 
 class DepartmentController extends Controller
 {
@@ -17,6 +18,7 @@ class DepartmentController extends Controller
     {
         $departments = $this->departmentRepository->getPaginate(2);       
         return view('admin.department.index', compact('departments'));
+        
     }
     /**
      * Show the form for creating a new resource.

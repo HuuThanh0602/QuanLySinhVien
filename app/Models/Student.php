@@ -14,6 +14,7 @@ class Student extends Model
     use SoftDeletes;
     protected $cats = ['deleted_at' => 'datetime'];
     protected $fillable=[
+        'id',
         'full_name',
         'day_of_birth',
         'gender',

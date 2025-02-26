@@ -24,7 +24,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div> 
-                <div class="modal-footer">
+                <div class="text-end">
                     <a href="{{ route('admin.subject.index') }}" class="btn btn-secondary">{{__('common.cancel')}}</a>
                     <button type="submit" class="btn btn-success">{{__('common.save')}}</button>
                 </div>

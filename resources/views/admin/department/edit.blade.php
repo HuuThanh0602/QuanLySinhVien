@@ -25,10 +25,9 @@
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div> 
-                    
+                    </div>  
                     <div class="text-end">
-                        <a href="{{ route('admin.department.index') }}" class="btn btn-secondary">{{ __('common.cancel') }}</a>
+                        <a href="{{ route('admin.department.index') }}" class="btn btn-secondary ">{{ __('common.cancel') }}</a>
                         <button type="submit" class="btn btn-success">{{ __('common.save') }}</button>
                     </div>
                 </form>
