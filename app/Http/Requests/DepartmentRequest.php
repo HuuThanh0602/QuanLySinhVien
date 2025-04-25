@@ -24,14 +24,7 @@ class DepartmentRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'description' => 'max:255',
-        ];
-    }
-    public function messages()
-    {
-        return[
-            'name.required' => __('validation.required', ['attribute'=>__('common.department_name')]),
-            'name.max' => __('validation.max.string',['attribute'=>__('common.department_name'),'max'=>50]),
-            'description.max' => __('validation.max.string',['attribute'=>__('common.description'),'max'=>255]), 
+
         ];
     }
 }

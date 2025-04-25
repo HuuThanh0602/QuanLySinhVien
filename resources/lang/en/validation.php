@@ -192,6 +192,22 @@ return [
     */
 
     'attributes' => [
+        'name' => 'Name',
+        'description' => 'Description',
+        'email' => 'Email',
+        'password' => 'Password',
+        'score' => 'Score',
+        'student_id' => 'Student ID',
+        'subject_id' => 'Subject ID',
+        'full_name' => 'Full Name',
+        'day_of_birth' => 'Day off birth',
+        'gender' => 'Gender',
+        'address' => 'Address',
+        'phone' => 'Phone',
+        'department_id' => 'Department',
+        'subject_id.*' => 'subject',
+        'score.*' => 'score',
+
     ],
 
 ];

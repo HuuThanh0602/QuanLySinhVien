@@ -7,75 +7,89 @@ use App\Http\Requests\StudentRequest;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Repositories\Student\StudentRepositoryInterface;
+use App\Repositories\Subject\SubjectRepositoryInterface;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function __construct(private StudentRepositoryInterface $studentRepository, private DepartmentRepositoryInterface $departmentRepository)
-    {
-    }
+    public function __construct(
+        private StudentRepositoryInterface $studentRepository,
+        private DepartmentRepositoryInterface $departmentRepository,
+        private SubjectRepositoryInterface $subjectRepository
+    ) {}
+
     public function index(Request $request)
     {
-        $students = $this->studentRepository->search(2,$request->only('age_from','age_to','carrier','finished_level','score_to','score_from'));
-        return view('admin.student.index',compact('students'));   
+        $students = $this->studentRepository->search($request->only('paginate'), $request->except('token', 'paginate'));
+        $departments = $this->departmentRepository->getAll();
+
+
+        return view('admin.student.index', compact('students', 'departments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        
-        $departments=$this->departmentRepository->getAll();
+
+        $departments = $this->departmentRepository->getAll();
         return view('admin.student.create', compact('departments'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StudentRequest $request)
     {
-       
-        $this->studentRepository->store($request->all());
-        return redirect()->route('admin.student.index')->with('success',__('messages.success.create'));
+        if ($this->studentRepository->storeStudent($request->except('_token'))) {
+            return redirect()->route('admin.student.index')->with('success', __('messages.success.create'));
+        };
+        return back()->with('error', __('messages.error.create'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $departments=$this->departmentRepository->getAll();
-        $student=$this->studentRepository->find($id);
-        return view('admin.student.edit',compact('departments','student'));
+        $departments = $this->departmentRepository->getAll();
+        $student = $this->studentRepository->find($id);
+        return response()->json([
+            'student' => $student,
+            'departments' => $departments
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(StudentRequest $request, string $id)
     {
-        $this->studentRepository->update($id,$request->all());
-        return redirect()->route('admin.student.index')->with('success',__('messages.success.update'));
-
+        $attribute = $request->except('_token', '_method');
+        if ($this->studentRepository->update($id, $attribute)) {
+            session()->flash('success', __('messages.success.update'));
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+        session()->flash('error', __('messages.error.update'));
+        return response()->json([
+            'success' => false,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $this->studentRepository->destroy($id);
-        return redirect()->route('admin.student.index')->with('success',__('messages.success.delete'));
+        if ($this->studentRepository->destroyStudent($id)) {
+            return redirect()->route('admin.student.index')->with('success', __('messages.success.delete'));
+        };
+        return back()->with('error', __('messages.error.delete'));
+    }
+
+    public function destroyYearOld()
+    {
+        if ($this->studentRepository->destroyYearOld()) {
+            return redirect()->route('admin.student.index')->with('success', __('messages.success.delete'));
+        }
+        return back()->with('error', __('messages.error.delete'));
+    }
+
+    public function subjectNotStudied($id)
+    {
+
+        $subjectNotStudieds = $this->subjectRepository->getSubjectNotStudied($id);
+
+        return response()->json([
+            'subjectNotStudieds' => $subjectNotStudieds,
+            'id' => $id
+        ]);
     }
 }

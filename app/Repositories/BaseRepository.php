@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Repositories;
+
 use App\Repositories\RepositoryInterface;
 
-abstract class BaseRepository implements  RepositoryInterface
+abstract class BaseRepository implements RepositoryInterface
 {
     protected $model;
     protected $paginate;
@@ -14,34 +16,43 @@ abstract class BaseRepository implements  RepositoryInterface
     abstract public function getModel();
     public function setModel()
     {
+
         $this->model = app()->make(
             $this->getModel()
+
         );
     }
+
     public function getAll()
     {
         return $this->model->all();
     }
-    public function getPaginate($paginate){
+
+    public function getPaginate($paginate)
+    {
         return $this->model->paginate($paginate);
     }
+
     public function find($id)
     {
         return $this->model->findOrfail($id);
     }
-    public function store(array $attributes)
+
+    public function store($attributes)
     {
         return $this->model->create($attributes);
     }
-    public function update($id, array $attributes)
+
+    public function update($id, $attributes)
     {
-        $results = $this->find($id);
-        if($results){
-            $results->update($attributes);
-            return $results;
+        $result = $this->find($id);
+        if ($result) {
+            $result->update($attributes);
+            return $result->update($attributes);
         }
         return false;
     }
+
     public function destroy($id)
     {
         return $this->find($id)->delete();

@@ -22,16 +22,8 @@ class SubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|max:50',
-            'description'=>'max:255',
-        ];
-    }
-    public function messages()
-    {
-        return[
-            'name.required'=>__('validation.required',['attribute'=>__('common.subject_name')]),
-            'name.max'=>__('validation.max.string',['attribute'=>__('common.subject_name'),'max'=>50]),
-            'description.max'=>__('validation.max.string',['attribute'=>__('common.description'),'max'=>50]),
+            'name' => 'required|max:50',
+            'description' => 'max:255',
         ];
     }
 }

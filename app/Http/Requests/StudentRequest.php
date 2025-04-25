@@ -21,31 +21,17 @@ class StudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name'=>'required|max:50',
-            'day_of_birth'=>'required|date',
-            'gender'=>'required',
-            'address'=>'required|max:255',
-            'phone'=>'required|digits:10',
-            'department'=>'required',
-            'email'=>'required|email',
+        $rules = [
+            'full_name' => 'required|max:50',
+            'day_of_birth' => 'required|date',
+            'gender' => 'required',
+            'address' => 'required|max:255',
+            'phone' => 'required|digits:10',
+            'department_id' => 'required',
         ];
-    }
-    public function messages(){
-        return [
-            'name.required'=>__('validation.required',['attribute'=>__('common.department')]),
-            'name.max'=>__('validation.max.string',['attribute'=>__('common.name'),'max'=>50]),
-            'day_of_birth.required'=>__('validation.required',['attribute'=>__('common.day_of_birth')]),
-            'gender.required'=>__('validation.required',['attribute'=>__('common.gender')]),
-            'address.required'=>__('validation.required',['attribute'=>__('common.address')]),
-            'address.max'=>__('validation.max.string',['attribute'=>__('common.address'),'max'=>255]),
-            'phone.required'=>__('validation.required',['attribute'=>__('common.phone')]),
-            'phone.digits'=>__('validation.numeric',['attribute'=>__('common.phone'),'digits'=>10]),
-            'phone.unique'=>__('validation.unique',['attribute'=>__('common.phone')]),
-            'department.required'=>__('validation.required',['attribute'=>__('common.department')]),
-            'email.required'=>__('validation.required',['attribute'=>__('common.email')]),
-            'email.email'=>__('validation.email',['attribute'=>__('common.email')]),
-            'email.unique'=>__('validation.unique',['attribute'=>__('common.email')]),
-        ];
+        if ($this->route()->getName() == "admin.student.store") {
+            $rules['email'] = 'required|unique:users|email';
+        }
+        return $rules;
     }
 }
